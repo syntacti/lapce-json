@@ -13,16 +13,21 @@ struct State {}
 
 register_plugin!(State);
 
+  ( $x:expr ) => {
+    String::from($x)
+  };
+}
+
 fn initialize(params: InitializeParams) -> Result<()> {
     let document_selector: DocumentSelector = vec![DocumentFilter {
         // lsp language id
-        language: Some(String::from("language_id")),
+        language: Some(String::from("json")),
         // glob pattern
-        pattern: Some(String::from("**/*.{ext1,ext2}")),
+        pattern: Some(String::from("**/*.json")),
         // like file:
         scheme: None,
     }];
-    let mut server_args = vec![];
+    let mut server_args = vec!["--stdio"];
 
     // Check for user specified LSP server path
     // ```
@@ -90,11 +95,11 @@ fn initialize(params: InitializeParams) -> Result<()> {
     };
 
     // Plugin working directory
-    let volt_uri = VoltEnvironment::uri()?;
-    let server_uri = Url::parse(&volt_uri)?.join("[filename]")?;
+    // let volt_uri = VoltEnvironment::uri()?;
+    // let server_uri = Url::parse(&volt_uri)?.join("[filename]")?;
 
     // if you want to use server from PATH
-    // let server_uri = Url::parse(&format!("urn:{filename}"))?;
+    let server_uri = Url::parse(&format!("urn:vscode-json-languageserver"))?;
 
     // Available language IDs
     // https://github.com/lapce/lapce/blob/HEAD/lapce-proxy/src/buffer.rs#L173

@@ -1,13 +1,14 @@
-name = "<plugin-name>"
-version = "0.0.0"
-author = "<your name>"
-display-name = "<plugin-display-name>"
-description = "<plugin-description>"
-wasm = "bin/<plugin-name>.wasm"
+name = "lapce-json"
+version = "0.0.1"
+author = "ghishadow"
+display-name = "JSON"
+description = "JSON for Lapce"
+wasm = "bin/lapce-json.wasm"
 
 [activation]
-language = []
-workspace-contains = []
+language = ["json"]
+workspace-contains = ["*/*.json"]
+
 
 [config."volt.serverPath"]
 default = ""
@@ -22,7 +23,7 @@ description = "Path to custom LSP executable"
 # description = ""
 
 # [config."lspSettingString"]
-# default = ""
+# default = "":
 # description = ""
 
 # [config."lspSettingBool"]
